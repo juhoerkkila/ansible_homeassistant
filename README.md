@@ -7,7 +7,7 @@ Transfers home assistant configuration to remote using ansible-playbook
 + homeassistant as a remote target
 + preferrably a ssh key on the remote target HA to allow ansible to perform the changes
 
-## Prelimenary configuration
+## Preliminary configuration
 + Make a copy of **homeassistant.example** --> **homeassistant** and edit variables to match your services
   - Set HA configuration path where you maintain it on the local machine to variable  **'localLocal'**
   - homeassistant host to match your HA ip or hostname
