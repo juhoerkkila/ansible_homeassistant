@@ -10,5 +10,5 @@
 - hosts: homeassistant
   roles:
    - rsyncha
-  remote_user: homeassistant
+  remote_user: '{{ haUser }}'
   tags: homeassistant

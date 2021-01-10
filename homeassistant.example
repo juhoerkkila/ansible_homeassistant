@@ -3,14 +3,10 @@ gitrepo:
   hosts:
     localhost
   vars:
-    # TODO: variables from Ansible Vault, vault to git ignore list
-    # TODO: General git repo rather than just bitbucket
-    bitbucketRepo:  "[your HA repo]"
-    bitbucketOwner: "[your bitbucket]"
-    bitbucketUrl:   "git@bitbucket.org:[your bitbucket repo]git"
+    gitUrl:   "git@[your git repo]"
     localLocal:     "[your local HA configuration full path]"
     repoLocation:   "{{ repoLocation_global }}/"
-    haConfSrc:      "{{ repoLocation }}homeassistant/"
+    haConfSrc:      "{{ repoLocation }}"
 
 homeassistant:
   hosts:

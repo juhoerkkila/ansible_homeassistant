@@ -8,10 +8,10 @@
 
 - name: Remote repository handling
   block:
-  - name: Clone / checkout branch ({{ bitbucketUrl }}/{{ branch }}) to local folder ({{ repoLocation }})
+  - name: Clone / checkout branch ({{ gitUrl }}/{{ branch }}) to local folder ({{ repoLocation }})
     git:
       dest: "{{ repoLocation }}"
-      repo: "{{ bitbucketUrl }}"
+      repo: "{{ gitUrl }}"
       version: "{{ branch }}"
   when:
     - branch != "local"
@@ -22,7 +22,7 @@
   - name: Change repoLocation to be localLocal ({{ localLocal }})
     set_fact:
       repoLocation: "{{ localLocal }}"
-      haConfSrc: "{{ localLocal }}homeassistant/"
+      haConfSrc: "{{ localLocal }}"
   - debug:
       msg: "Local branch defined, using current status from dir: {{ haConfSrc }}"
   when:
