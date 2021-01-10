@@ -1,0 +1,22 @@
+---
+# Copy .HA_VERSION from Dest (homeassistant) to Src (local) to avoid changing version file
+- name: fetch .HA_VERSION from remote ({{ haConfRemote }}.HA_VERSION) to local ({{ hostvars[groups['gitrepo'][0]]['haConfSrc'] }})
+  fetch:
+    src: "{{ haConfRemote }}.HA_VERSION"
+    dest: "{{ hostvars[groups['gitrepo'][0]]['haConfSrc'] }}"
+    flat: yes 
+  when:
+    - getVersion is defined
+
+# rsync homeassistant configs to ha-server
+- name: rsync homeassistant configs to ha-server
+  block:
+    - name: rsync ha-configs to ha-server ({{ hostvars[groups['gitrepo'][0]]['haConfSrc'] }}) --> ({{ haConfRemote }})
+      synchronize:
+        src: "{{ hostvars[groups['gitrepo'][0]]['haConfSrc'] }}"
+        dest: "{{ haConfRemote }}"
+        # Sync only relevant files and not those under the directories
+        # delete: true
+        # recursive: yes
+      tags:
+        - rsync

@@ -1,0 +1,24 @@
+---
+gitrepo:
+  hosts:
+    localhost
+  vars:
+    # TODO: variables from Ansible Vault, vault to git ignore list
+    # TODO: General git repo rather than just bitbucket
+    bitbucketRepo:  "[your HA repo]"
+    bitbucketOwner: "[your bitbucket]"
+    bitbucketUrl:   "git@bitbucket.org:[your bitbucket repo]git"
+    localLocal:     "[your local HA configuration full path]"
+    repoLocation:   "{{ repoLocation_global }}/"
+    haConfSrc:      "{{ repoLocation }}homeassistant/"
+
+homeassistant:
+  hosts:
+    [HA ip or hostname]
+  vars:
+    # TODO: variables from Ansible Vault, vault to git ignore list
+    haUser:       "[your HA user]"
+    haGroup:      "[your HA user's group]"
+    haConfRemote: "/home/{{ haUser }}/.homeassistant/"
+    # Filemode not used in rsync. Use this if you want to use copy step instead of rsync
+    # fileMode:     "u=rwX,g=rX,o=r"

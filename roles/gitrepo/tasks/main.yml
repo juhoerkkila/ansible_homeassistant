@@ -1,0 +1,41 @@
+---
+# gitrepo tasks
+- name: Validate attributes
+  fail:
+    msg: "Some required attributes are missing. Check your surroundings!"
+  when: branch is not defined
+  check_mode: no
+
+- name: Remote repository handling
+  block:
+  - name: Clone / checkout branch ({{ bitbucketUrl }}/{{ branch }}) to local folder ({{ repoLocation }})
+    git:
+      dest: "{{ repoLocation }}"
+      repo: "{{ bitbucketUrl }}"
+      version: "{{ branch }}"
+  when:
+    - branch != "local"
+  
+  # 
+- name: Branch defined as local
+  block:
+  - name: Change repoLocation to be localLocal ({{ localLocal }})
+    set_fact:
+      repoLocation: "{{ localLocal }}"
+      haConfSrc: "{{ localLocal }}homeassistant/"
+  - debug:
+      msg: "Local branch defined, using current status from dir: {{ haConfSrc }}"
+  when:
+    - branch == "local"
+
+# TODO: finalize this j2 part and check whether HA uses j2 temlating
+- name: Find and fill possible .j2 templates
+  block:
+  - name: Find and register .j2 templates in ({{ haConfSrc }})
+    find:
+      paths: "{{ haConfSrc }}"
+      patterns: "*.j2"
+      recurse: yes
+    register: j2templates
+  - debug:
+      msg: "{{ j2templates.files }}"

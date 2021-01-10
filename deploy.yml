@@ -1,0 +1,14 @@
+---
+# Gitrepo part does the checkout of selected branch to a local temp path
+- hosts: gitrepo
+  connection: local
+  roles:
+    - gitrepo
+  tags: gitrepo
+
+# rsyncha part synchronizes checkedout repo homeassistant configs to remote homeassistant
+- hosts: homeassistant
+  roles:
+   - rsyncha
+  remote_user: homeassistant
+  tags: homeassistant
