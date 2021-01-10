@@ -12,9 +12,6 @@ homeassistant:
   hosts:
     [HA ip or hostname]
   vars:
-    # TODO: variables from Ansible Vault, vault to git ignore list
     haUser:       "[your HA user]"
     haGroup:      "[your HA user's group]"
     haConfRemote: "/home/{{ haUser }}/.homeassistant/"
-    # Filemode not used in rsync. Use this if you want to use copy step instead of rsync
-    # fileMode:     "u=rwX,g=rX,o=r"

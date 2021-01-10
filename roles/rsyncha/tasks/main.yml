@@ -15,8 +15,5 @@
       synchronize:
         src: "{{ hostvars[groups['gitrepo'][0]]['haConfSrc'] }}"
         dest: "{{ haConfRemote }}"
-        # Sync only relevant files and not those under the directories
-        # delete: true
-        # recursive: yes
       tags:
         - rsync
